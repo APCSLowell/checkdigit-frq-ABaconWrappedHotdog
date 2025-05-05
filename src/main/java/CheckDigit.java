@@ -8,6 +8,13 @@ public class CheckDigit
    public static int getCheck(int num) 
    {  
      /* to be implemented in part (a) */
+     String numStr = Integer.toString(num);
+    int sum = 0;
+    for (int i = 0; i < numStr.length(); i++) {
+        int digit = Character.getNumericValue(numStr.charAt(i));
+        sum += digit * (i + 1); // position starts at 1
+    }
+    return sum % 10;
    }
  
   /** Returns true if numWithCheckDigit is valid, or false    
@@ -19,6 +26,10 @@ public class CheckDigit
    public static boolean isValid(int numWithCheckDigit)    
    {      
      /* to be implemented in part (b) */    
+     int originalNum = numWithCheckDigit / 10; // drop the last digit
+    int actualCheckDigit = numWithCheckDigit % 10; // extract the last digit
+    int expectedCheckDigit = getCheck(originalNum);
+    return actualCheckDigit == expectedCheckDigit;
    }    
    
    /** Returns the number of digits in num. */    
